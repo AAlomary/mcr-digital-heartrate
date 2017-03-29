@@ -1,5 +1,6 @@
 package heartrate;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class HeartRateCalculator {
@@ -12,13 +13,20 @@ public class HeartRateCalculator {
     private void run() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter resting heart rate: ");
-        String restingHeartRate = scanner.nextLine();
+        int restingHeartRate = scanner.nextInt();
         System.out.print("Enter age: ");
-        String age = scanner.nextLine();
+        int age = scanner.nextInt();
+
+        List<HeartIntensityMonitor> heartIntensities = CalculateHeartRate.calculateForDifferentIntensity(age, restingHeartRate);
 
         System.out.printf("Age: %s, Resting heart rate: %s\n", age, restingHeartRate);
 
-        System.out.printf("Intensity\t|Heart rate\n");
+        System.out.printf("Intensity\t|     Heart rate\n");
+        System.out.println("------------|------------");
+
+        for (HeartIntensityMonitor heartIntensity : heartIntensities) {
+            System.out.println(heartIntensity.getIntensity() + "%\t\t\t|     " + heartIntensity.getRestingHeartRate());
+        }
 
 
     }
